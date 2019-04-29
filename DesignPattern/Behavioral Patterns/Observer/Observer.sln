@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObserverConsole", "ObserverConsole\ObserverConsole.csproj", "{C3A6CF60-64C9-4B9D-9EB7-5536B3E7DD15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealWorldCode", "RealWorldCode\RealWorldCode.csproj", "{3C938B65-9A70-486B-89BA-3BE2162E502D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Observer", "Observer\Observer.csproj", "{5BB4F144-2697-4F88-B2E8-DF2DA0DA7E02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3A6CF60-64C9-4B9D-9EB7-5536B3E7DD15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3A6CF60-64C9-4B9D-9EB7-5536B3E7DD15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3A6CF60-64C9-4B9D-9EB7-5536B3E7DD15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3A6CF60-64C9-4B9D-9EB7-5536B3E7DD15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C938B65-9A70-486B-89BA-3BE2162E502D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C938B65-9A70-486B-89BA-3BE2162E502D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C938B65-9A70-486B-89BA-3BE2162E502D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C938B65-9A70-486B-89BA-3BE2162E502D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BB4F144-2697-4F88-B2E8-DF2DA0DA7E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB4F144-2697-4F88-B2E8-DF2DA0DA7E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB4F144-2697-4F88-B2E8-DF2DA0DA7E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB4F144-2697-4F88-B2E8-DF2DA0DA7E02}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

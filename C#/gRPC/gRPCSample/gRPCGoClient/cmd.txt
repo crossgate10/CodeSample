@@ -1,0 +1,1 @@
+protoc -I .\gRPCDemo\protos\ .\gRPCDemo\protos\helloworld.proto --go_out .\gRPCDemo\Generated\ --plugin=grpc:.

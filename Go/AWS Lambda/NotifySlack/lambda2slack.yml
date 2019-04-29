@@ -1,0 +1,91 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description:
+  Lambda to slack use golang
+
+Parameters:
+  S3BucketName:
+    Type: String
+    Description: S3 Bucket for lambda source
+    Default: "{type S3 bucket name here. make it public}"
+  S3ObjectName:
+    Type: String
+    Description: S3 Object for lambda source
+    Default: "{type zip filename here which in S3.}"
+  Message:
+    Type: String
+    Description: select your ECS App Name
+    Default: this message from cloudformation.
+  slackChannel:
+    Type: String
+    Description: slack channel will be hooked once the CodeCommit be triggered
+    Default: "{default channel name}"
+  slackHookUrl:
+    Type: String
+    Description: "{type webhookurl here.}"
+Resources:
+
+  Lambda2SlackExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName: root
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+            Resource: arn:aws:logs:*:*:*
+          - Effect: Allow
+            Action:
+            - ec2:DescribeImages
+            Resource: "*"
+          - Effect: Allow
+            Action:
+            - ecs:*
+            Resource: "*"
+
+  LambdaToSlack:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Code:
+        S3Bucket: !Ref S3BucketName
+        S3Key: !Ref S3ObjectName
+      Description: Message to Slack
+      Handler: main
+      Role:
+          Fn::GetAtt:
+            - "Lambda2SlackExecutionRole"
+            - "Arn"
+      Runtime: go1.x
+      Environment:
+        Variables:
+          SLACK_CHANNEL: !Ref slackChannel
+          HOOK_URL: !Ref slackHookUrl
+          MESSAGE: !Ref Message
+      Timeout: "300"
+
+  Lambda2SlackCloudwatchLog:
+    Type: AWS::Logs::LogGroup
+    DependsOn: LambdaToSlack
+    Properties:
+      LogGroupName:
+        Fn::Join:
+          - ""
+          -
+            - "/aws/lambda/"
+            - !Ref LambdaToSlack
+      RetentionInDays: 14

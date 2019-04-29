@@ -1,0 +1,17 @@
+﻿<Window x:Class="AutoUpdateSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoUpdateSample"
+        xmlns:vm="clr-namespace:ViewModels;assembly=ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="160" Width="270">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <TextBlock x:Name="versionblock" Text="Version：" Margin="10,50,0,50" FontSize="14" HorizontalAlignment="Left" Height="30" Width="75"/>
+        <TextBlock x:Name="version" Text="{Binding AppVersion}" Margin="0,50,10,50" FontSize="14" HorizontalAlignment="Right" Width="160" Height="30"/>
+    </Grid>
+</Window>
