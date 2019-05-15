@@ -1,0 +1,26 @@
+FROM golang:latest AS builder
+WORKDIR /go_swaggerui
+ENV GO111MODULE=on
+
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
+COPY . .
+
+WORKDIR /go_swaggerui/cmd/go_swaggerui
+RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o go_swaggerui
+
+FROM alpine:latest
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache curl bash && \
+    rm -rf /var/cache/apk/*
+
+WORKDIR /go_swaggerui
+COPY --from=builder /go_swaggerui/cmd/go_swaggerui/go_swaggerui /go_swaggerui/go_swaggerui
+RUN addgroup -g 1000 appuser && \
+    adduser -D -u 1000 -G appuser appuser && \
+    chown -R appuser:appuser /go_swaggerui
+USER appuser
+
+CMD ./go_swaggerui

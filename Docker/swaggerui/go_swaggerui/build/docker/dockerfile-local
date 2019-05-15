@@ -1,0 +1,19 @@
+FROM golang:latest AS builder
+WORKDIR /go_swaggerui
+ENV GO111MODULE=on
+
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
+COPY . .
+
+RUN go get github.com/pilu/fresh;
+RUN go get -u golang.org/x/lint/golint;
+
+WORKDIR /go_swaggerui/cmd/go_swaggerui
+
+ENV PATH /go_swaggerui/cmd/go_swaggerui:$PATH
+ENV GIN_MODE=debug
+CMD fresh -c ../../fresh.conf
+
+EXPOSE 8080
